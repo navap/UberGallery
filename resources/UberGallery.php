@@ -33,7 +33,9 @@ class UberGallery {
     /**
      * UberGallery construct function. Runs on object creation.
      */
-    public function __construct() {
+    public function __construct($relativeCachePath) {
+
+        $this->relativeCachePath = $relativeCachePath;
 
         // Get timestamp for the current time
         $this->_now = time();
@@ -69,7 +71,7 @@ class UberGallery {
             $this->setThemeName($config['basic_settings']['theme_name']);
             $this->setSortMethod($config['advanced_settings']['images_sort_by'], $config['advanced_settings']['reverse_sort']);
             $this->setDebugging($config['advanced_settings']['enable_debugging']);
-            $this->setCacheDirectory($this->_appDir . '/cache');
+            $this->setCacheDirectory($this->relativeCachePath);
 
             if ($config['basic_settings']['enable_pagination']) {
                 $this->setImagesPerPage($config['advanced_settings']['images_per_page']);
@@ -646,14 +648,15 @@ class UberGallery {
         $fileExtension = pathinfo($source, PATHINFO_EXTENSION);
 
         // Build file name
-        $fileName = $thumbWidth . 'x' . $thumbHeight . '-' . $quality . '-' . $fileHash . '.' . $fileExtension;
+        $srcFileName = pathinfo($source, PATHINFO_FILENAME);
+        $fileName = $srcFileName . '-' . $thumbWidth . '.' . $fileExtension;
 
         // Build thumbnail destination path
-        $destination = $this->_config['cache_dir'] . '/' . $fileName;
+        $destination = pathinfo($source, PATHINFO_DIRNAME) . '/thumbs/' . $fileName;
 
         // If file is cached return relative path to thumbnail
         if ($this->_isFileCached($destination)) {
-            $relativePath = $this->_rThumbsDir . '/' . $fileName;
+            $relativePath = $this->_getRelativePath(getcwd(), $destination);
             return $relativePath;
         }
 
@@ -711,7 +714,7 @@ class UberGallery {
         }
 
         // Return relative path to thumbnail
-        $relativePath = $this->_rThumbsDir . '/' . $fileName;
+        $relativePath = $this->_getRelativePath(getcwd(), $destination);
         return $relativePath;
     }
 
