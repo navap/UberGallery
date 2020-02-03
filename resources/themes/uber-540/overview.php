@@ -12,7 +12,7 @@
       $image['thumb_path'] = get_site_url() . '/' . implode('/', array_slice($newThumbPath, -6)); ?>      
       <div class="grid-item">
         <a href="<?php echo $album['link']; ?>" title="<?php echo ucwords($album['title']); ?>">
-          <img src="<?php echo $image['thumb_path']; ?>" alt="<?php echo $image['file_title']; ?>" class="img-responsive img-promo"/>
+          <img src="<?php echo $image['thumb_path']; ?>" class="img-responsive img-promo" />
         </a>
         <div class="image-caption">
           <a href="<?php echo $album['link']?>" title="<?php echo ucwords($album['title']); ?>"><?php echo ucwords($album['title']); ?></a>
