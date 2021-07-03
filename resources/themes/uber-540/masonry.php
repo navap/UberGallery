@@ -11,7 +11,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
 <?php //<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script> ?>
-<script src="<?php get_site_url() ?>/static/assets/jquery.fancybox.3.3.5-540.min.js"></script>
+<script src="<?php get_site_url() ?>/static/assets/jquery.fancybox.3.3.5-540.min.js?540"></script>
+<?php // THIS FILE NEEDS TO BE CREATED TO MAKE THUMBNAILS WORK!!!!! ?>
 
 <style>
 .grid-sizer,
